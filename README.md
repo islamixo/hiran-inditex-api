@@ -43,3 +43,9 @@ Returns status, price, and if `completed`, the generated paths.
   ]
 }
 ```
+
+## Diseño y decisiones
+- **API-First**: DTOs validados con `class-validator`. Swagger habilitado.
+- **Persistencia**: Colecciones `tasks` e `images` con **índices** por estado, fechas, `taskId` y `md5`.
+- **Procesado asíncrono**: tras crear la tarea, se procesa en `setImmediate` para no bloquear el request (se podría sustituir por Bull/Redis si se requiere robustez/escala).
+- **Paths de salida**: `/output/{nombre_original}/{resolucion}/{md5}.{ext}`. Directorio base configurable por `OUTPUT_DIR`.

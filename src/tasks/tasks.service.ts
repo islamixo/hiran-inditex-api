@@ -31,7 +31,7 @@ export class TasksService {
       images: [],
     });
 
-    // Procesamiento asíncrono no bloqueante
+    // Non-blocking asynchronous processing
     setImmediate(async () => {
       try {
         const { buffer } = await readInputToBuffer(dto.input);
