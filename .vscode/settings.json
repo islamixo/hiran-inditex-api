@@ -1,0 +1,29 @@
+// Place your settings in this file to overwrite the default settings
+{
+  "standard.enable": true,
+  "standard.autoFixOnSave": true,
+  "editor.formatOnSave": false,
+  "editor.detectIndentation": false,
+    
+  "editor.fontSize": 14,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.wrappingIndent": "indent",
+  "eslint.enable": false,
+  "extensions.ignoreRecommendations": true,
+  "files.exclude": {
+      "**/._*": true
+  },
+  "files.insertFinalNewline": true,
+  // Remove the following to enable Git
+  "git.enabled": true,
+  "html.format.extraLiners": "body",
+  "html.format.indentInnerHtml": true,
+  "html.format.unformatted": "b,em,i,span,strong,wbr",
+  "html.format.wrapLineLength": 0,
+  "window.zoomLevel": 0.75,
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false
+}
+ 
