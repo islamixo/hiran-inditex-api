@@ -1,51 +1,147 @@
-# Image Tasks API (NestJS)
+# 📸 Image Tasks API (NestJS)
 
-API REST para **crear tareas** de procesado de imágenes y **consultar su estado**. Genera variantes de 1024px y 800px de ancho usando **sharp**.
+A REST API to **create image processing tasks** and **check their status**.  
+Generates 1024px and 800px width variants using [**sharp**](https://sharp.pixelplumbing.com/).  
 
-## Requisitos
-- Node.js 20+
-- Docker (opcional) para MongoDB
+## 🚀 Features
+- **Image processing** from a local path or remote URL.
+- **Asynchronous task execution** to avoid blocking requests.
+- **Task management** with status (`pending`, `completed`, `failed`) and pricing.
+- **Swagger UI** for documentation and live testing.
+- **MongoDB persistence** with indexes for efficient queries.
+- **Clean validation** with `class-validator` and global pipes.
+- **Centralized error handling** with a global exception filter.
 
-## Arranque rápido
+---
+
+## 📦 Requirements
+- **Node.js** ≥ 20
+- **MongoDB** (local)
+---
+
+## 🏁 Quick Start
+
+**1. Clone & install dependencies**
 ```bash
-npm i
+npm install
+```
+
+**2. Run the application**
+```bash
 npm run start:dev
 ```
 
-## Swagger interface 
-`http://localhost:3000/docs`
-
-## Endpoints
-### POST /tasks
-Create a task from a local path or URL.
-
-**Body**
-```json
-{ "input": "https://picsum.photos/seed/nest/1200/800" }
+**4. Open Swagger UI**
 ```
-**Response example**
-```json
-{ "taskId":"65d4a54b89c5e342b2c2c5f6", "status":"pending", "price":25.5 }
+http://localhost:3000/docs
 ```
 
-### GET /tasks/:taskId
-Returns status, price, and if `completed`, the generated paths.
+---
 
-**Example**
+## 📖 API Endpoints
+
+### **POST** `/tasks`
+Create a new image processing task from a **local file path** or a **remote URL**.
+
+**Request body**
 ```json
 {
-  "taskId":"65d4a54b89c5e342b2c2c5f6",
-  "status":"completed",
-  "price":25.5,
-  "images":[
-    {"resolution":1024, "path":"/output/image1/1024/f322b7.jpg"},
-    {"resolution":800,  "path":"/output/image1/800/202fd8.jpg"}
+  "input": "https://picsum.photos/seed/nest/1200/800"
+}
+```
+
+**Example response**
+```json
+{
+  "taskId": "65d4a54b89c5e342b2c2c5f6",
+  "status": "pending",
+  "price": 25.5
+}
+```
+
+---
+
+### **GET** `/tasks/:taskId`
+Retrieve task status, price, and generated image variants if completed.
+
+**Example response**
+```json
+{
+  "taskId": "65d4a54b89c5e342b2c2c5f6",
+  "status": "completed",
+  "price": 25.5,
+  "images": [
+    { "resolution": 1024, "path": "/output/image1/1024/f322b7.jpg" },
+    { "resolution": 800,  "path": "/output/image1/800/202fd8.jpg" }
   ]
 }
 ```
 
-## Diseño y decisiones
-- **API-First**: DTOs validados con `class-validator`. Swagger habilitado.
-- **Persistencia**: Colecciones `tasks` e `images` con **índices** por estado, fechas, `taskId` y `md5`.
-- **Procesado asíncrono**: tras crear la tarea, se procesa en `setImmediate` para no bloquear el request (se podría sustituir por Bull/Redis si se requiere robustez/escala).
-- **Paths de salida**: `/output/{nombre_original}/{resolucion}/{md5}.{ext}`. Directorio base configurable por `OUTPUT_DIR`.
+---
+
+## 🛠 Design Decisions
+
+- **API-First**  
+  All endpoints are documented with Swagger; DTOs validated using `class-validator`.
+
+- **Persistence**  
+  - `tasks` collection: stores task metadata, status, price, and timestamps.  
+  - `images` collection: stores variant metadata (`resolution`, `md5`, `path`).  
+  - Indexed fields for performance: `status`, `createdAt`, `taskId`, `md5`.
+
+- **Asynchronous processing**  
+  Tasks are processed in the background using `setImmediate()` to avoid blocking requests.  
+  Could be upgraded to **Bull/Redis** for distributed queues.
+
+- **File output structure**  
+  ```
+  /output/{original_name}/{resolution}/{md5}.{ext}
+  ```
+  Base directory configurable via the `OUTPUT_DIR` environment variable.
+
+- **ValidationPipe**  
+  Global `ValidationPipe` with:
+  - `whitelist: true` → strips unexpected properties.  
+  - `transform: true` → automatically converts inputs to the correct types.
+
+- **Global Exception Filter**  
+  Captures and formats all errors into a consistent JSON response.
+
+---
+
+## ⚙️ Environment Variables
+Create a `.env` file based on `.env.example`:
+```env
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/image_tasks_db
+OUTPUT_DIR=./output
+INPUT_DIR=./input
+```
+
+---
+
+## 🧪 Testing
+```bash
+# Unit tests
+npm run test
+
+# E2E tests
+npm run test:e2e
+```
+
+---
+
+## 📂 Project Structure
+```
+src/
+ ├── config/           # Configuration and environment handling
+ ├── images/           # Image processing logic and schemas
+ ├── tasks/            # Task management logic and schemas
+ ├── common/           # Shared filters, pipes, and utilities
+ └── main.ts           # Application bootstrap
+```
+
+---
+
+## 📜 License
+Inditex

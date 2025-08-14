@@ -9,7 +9,6 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   app.useGlobalFilters(new AllExceptionsFilter());
 
-
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Image Tasks API')
     .setDescription('REST API for image processing and task query')
