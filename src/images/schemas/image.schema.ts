@@ -21,4 +21,3 @@ export class ImageVariant {
 export type ImageVariantDocument = HydratedDocument<ImageVariant>;
 export const ImageVariantSchema =  SchemaFactory.createForClass(ImageVariant);
 ImageVariantSchema.index({ taskId: 1, resolution: 1 }, { unique: false });
-ImageVariantSchema.index({ md5: 1 }, { unique: false });
