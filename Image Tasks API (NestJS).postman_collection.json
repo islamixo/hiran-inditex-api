@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "0f934556-a5d5-481c-9492-33dbfe4161c1",
+		"name": "Image Tasks API (NestJS)",
+		"description": "Colección para probar la API de tareas de procesado de imágenes.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5769067"
+	},
+	"item": [
+		{
+			"name": "Crear tarea (POST /tasks)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"input\": \"https://picsum.photos/seed/nest/1200/800\"}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tasks",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tasks"
+					]
+				},
+				"description": "Crea una tarea a partir de un path local o URL."
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar tarea (GET /tasks/:taskId)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/tasks/{{taskId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tasks",
+						"{{taskId}}"
+					]
+				},
+				"description": "Devuelve estado, precio y paths generados (si está completada)."
+			},
+			"response": []
+		},
+		{
+			"name": "Swagger (GET /docs)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/docs",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"docs"
+					]
+				},
+				"description": "UI de documentación."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "taskId",
+			"value": "68a1fc9f1d67e3d285734e55"
+		}
+	]
+}

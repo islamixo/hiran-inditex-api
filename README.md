@@ -129,15 +129,22 @@ npm run test
 npm run test:e2e
 ```
 
+A postman collection is included in the project for testing endpoints.
+```bash
+Image Tasks API (NestJS).postman_collection.json
+```
+
 ---
 
 ## 📂 Project Structure
 ```
 src/
+ ├── common/           # Shared filters, pipes, and utilities
  ├── config/           # Configuration and environment handling
  ├── images/           # Image processing logic and schemas
  ├── tasks/            # Task management logic and schemas
- ├── common/           # Shared filters, pipes, and utilities
+ ├── utils/            # Unique md5 hash generator and file manager
+ ├── app.module.ts     # Main module of the application
  └── main.ts           # Application bootstrap
 ```
 

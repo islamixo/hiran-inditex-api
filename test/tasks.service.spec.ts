@@ -4,14 +4,6 @@ import { TasksService } from '../src/tasks/tasks.service';
 import { Task, TaskSchema } from '../src/tasks/schemas/task.schema';
 import { ImagesModule } from '../src/images/images.modules';
 
-function tinyPngBuffer() {
-  // PNG 1x1 transparente
-  return Buffer.from(
-    '89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c4890000000a49444154789c636000000200015d0b2a1b0000000049454e44ae426082',
-    'hex',
-  );
-}
-
 describe('TasksService', () => {
   let service: TasksService;
 
