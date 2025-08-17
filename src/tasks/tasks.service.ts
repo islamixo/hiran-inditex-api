@@ -3,9 +3,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Task, TaskStatus } from './schemas/task.schema';
 import { CreateTaskDto } from './dto/create-task.dto';
-import { config } from 'src/config/configuration';
-import { ImagesService } from 'src/images/images.service';
-import { readInputToBuffer, getNameAndExt } from 'src/utils/file.util';
+import { config } from '../config/configuration';
+import { ImagesService } from '../images/images.service';
+import { readInputToBuffer, getNameAndExt } from '../utils/file.util';
 
 @Injectable()
 export class TasksService {

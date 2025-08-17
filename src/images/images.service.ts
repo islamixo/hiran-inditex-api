@@ -5,8 +5,8 @@ import { ImageVariant } from './schemas/image.schema';
 import sharp from 'sharp';
 import * as path from 'path';
 import * as fs from 'fs';
-import { ensureDir } from 'src/utils/file.util';
-import { md5Hex } from 'src/utils/hash.util';
+import { ensureDir } from '../utils/file.util';
+import { md5Hex } from '../utils/hash.util';
 
 @Injectable()
 export class ImagesService {
